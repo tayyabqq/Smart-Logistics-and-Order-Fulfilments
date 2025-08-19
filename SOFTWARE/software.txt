@@ -1,0 +1,125 @@
+1. Core Development Stack
+Category	Software	Purpose	Version/Notes
+Backend	Python 3.10+	FastAPI runtime	Enable async/await
+FastAPI	REST API framework	0.95+ for Pydantic v2
+SQLAlchemy 2.0	ORM for MySQL	Strict typing support
+Frontend	React 18	Dynamic UI	Concurrent rendering
+WebSocket API	Real-time updates	Socket.IO fallback
+Database	MySQL 8.0	Transactional data	JSON column support
+Redis 7.0	Caching/pub-sub	TLS cluster mode
+2. AI/ML Components
+Component	Software	Key Dependencies
+NLP	Dialogflow ES	gRPC client libs
+spaCy	Custom NER models
+CV	OpenCV 4.7	CUDA 11.8 for GPU
+YOLOv8	Ultralytics SDK
+Forecasting	Prophet	Stan backend
+PyTorch 2.0	FlashAttention
+3. DevOps & Infrastructure
+Layer	Toolchain	Critical Features
+Containers	Docker 24.0	BuildKit parallelization
+Kubernetes 1.28	Vertical Pod Autoscaler
+CI/CD	GitHub Actions	ARM64 build runners
+ArgoCD 2.7	GitOps synchronization
+Monitoring	Prometheus 2.45	Histogram quantiles
+Grafana 10.1	Pyroscope integration
+4. Specialized Middleware
+python
+# Critical communication protocols
+middleware = {
+    "Message Broker": "Apache Kafka 3.5 (KRaft mode)",
+    "API Gateway": "Kong 3.4 (Wasm plugins)",
+    "Service Mesh": "Linkerd 2.14 (Zero-trust)",
+    "Auth": "Keycloak 22.0 (FIDO2 support)"
+}
+5. Hardware-Specific Software
+Raspberry Pi Kitchen Terminals:
+
+BalenaOS 16.4 (OTA updates)
+
+Custom Debian image with:
+
+bash
+# Kernel modules
+CONFIG_LORA=y
+CONFIG_RFID=y
+# Real-time patches
+PREEMPT_RT_FULL=y
+6. Security Stack
+Layer	Tool	Compliance
+Static Analysis	Semgrep	CWE Top 25
+Secrets	Hashicorp Vault	FIPS 140-2
+TLS	cert-manager	ACME v2
+Audit	Falco 0.36	eBPF mode
+7. Testing Framework Matrix
+markdown
+| Test Type | Framework | Coverage Metric |
+|-----------|-----------|-----------------|
+| Unit      | pytest    | Branch coverage |
+| E2E       | Playwright| Visual regressions |
+| Load      | k6        | gRPC streaming |
+| Fuzz      | AFL++     | Corpus minimization |
+8. Commercial Software Considerations
+Priority 1 (Must-have):
+
+Dialogflow ES (Free tier sufficient for ≤100 RPM)
+
+Google Maps Platform (Directions API)
+
+Priority 2 (Scalability):
+
+Sentry (Error tracking)
+
+Datadog (APM + RUM)
+
+Version Control Strategy
+git
+# Branching model
+main -> release/* -> feat/*
+# Critical hooks
+pre-push: 
+  - mypy --strict
+  - pytest -m "not slow"
+pre-commit:
+  - ruff --fix
+  - hadolint
+Key Engineering Decisions:
+Python over Node.js for:
+
+Better pandas/polars integration
+
+Mature async/await in FastAPI
+
+Simpler ML deployment
+
+MySQL over PostgreSQL due to:
+
+Predictable query planner
+
+Lower ops overhead
+
+Native WebSocket pub/sub
+
+Kubernetes over serverless because:
+
+Stateful service requirements
+
+Custom hardware integrations
+
+Batch prediction workloads
+
+Implementation Checklist:
+
+Set up reproducible dev environments with Nix flakes
+
+Implement distributed tracing (OpenTelemetry)
+
+Configure chaos engineering experiments (Chaos Mesh)
+
+Establish SLOs for:
+
+Order processing latency (<300ms p99)
+
+Chatbot intent accuracy (>98%)
+
+Inventory sync delay (<1s)
